@@ -3,7 +3,7 @@ import type { NextPage } from "next"
 import { useQuery } from "react-query"
 import axios from "axios"
 
-import PostCard from "../../components/PostCard"
+import DataCard from "../../components/common/DataCard"
 import Loading from "../../components/common/Loading"
 import Error from "../../components/common/Error"
 
@@ -47,18 +47,18 @@ const Posts: NextPage = () => {
         <h1 className="display-3">Posts</h1>
         <button
           type="button"
-          className="btn btn-success btn-lg"
+          className="btn btn-success"
           onClick={() => refetch()}
         >
           Refetch Posts
         </button>
       </div>
 
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
         {data &&
           data.map((post: any) => (
             <div className="col" key={post.id}>
-              <PostCard title={post.title} href={`/posts/${post.id}`} />
+              <DataCard title={post.title} href={`/posts/${post.id}`} />
             </div>
           ))}
       </div>
@@ -86,9 +86,11 @@ const Posts: NextPage = () => {
         </ul>
       </nav>
 
-      <div className="my-3 text-center">
-        {isFetching && <p>Fetching next page... </p>}
-      </div>
+      {isFetching && (
+        <div className="text-center mt-3">
+          <p>Fetching next page... </p>
+        </div>
+      )}
     </section>
   )
 }

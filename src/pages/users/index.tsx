@@ -33,7 +33,9 @@ const Home: NextPage = () => {
   return (
     <section className="py-5">
       <h1 className="display-3">Users</h1>
-      <UsersTable users={data} />
+      <div className="mt-3">
+        <UsersTable users={data} />
+      </div>
     </section>
   )
 }

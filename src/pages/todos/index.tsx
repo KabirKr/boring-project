@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer"
 
 import axios from "axios"
 
-import PostCard from "../../components/PostCard"
+import DataCard from "../../components/common/DataCard"
 import Loading from "../../components/common/Loading"
 import Error from "../../components/common/Error"
 
@@ -55,13 +55,13 @@ const Todos: NextPage = () => {
         <h1 className="display-3">Todos (Infinite Scroll)</h1>
       </div>
 
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
         {data?.pages?.map((group, index) => {
           return (
             <Fragment key={index}>
               {group?.map((todo: any) => (
                 <div className="col" key={todo.id}>
-                  <PostCard title={todo.title} href="#" />
+                  <DataCard title={todo.title} href="#" />
                 </div>
               ))}
             </Fragment>

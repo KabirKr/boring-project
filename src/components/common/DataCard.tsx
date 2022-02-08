@@ -5,7 +5,7 @@ type Props = {
   href: string
 }
 
-const PostCard = ({ title, href }: Props) => {
+const DataCard = ({ title, href }: Props) => {
   return (
     <div className="card">
       <div className="card-body">
@@ -18,4 +18,4 @@ const PostCard = ({ title, href }: Props) => {
   )
 }
 
-export default PostCard
+export default DataCard
