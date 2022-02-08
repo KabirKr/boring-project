@@ -19,7 +19,7 @@ const UsersTable = ({ users }: Props) => {
     [],
   )
 
-  const data = useMemo(() => users, [])
+  const data = useMemo(() => users, [users])
 
   const tableInstance = useTable({ columns, data })
 
@@ -29,23 +29,39 @@ const UsersTable = ({ users }: Props) => {
   return (
     <table className="table" {...getTableProps()}>
       <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}> {column.render("Header")}</th>
-            ))}
-          </tr>
-        ))}
+        {headerGroups.map((headerGroup) => {
+          const { key, ...restHeaderGroupProps } =
+            headerGroup.getHeaderGroupProps()
+
+          return (
+            <tr key={key} {...restHeaderGroupProps}>
+              {headerGroup.headers.map((column) => {
+                const { key, ...restColumn } = column.getHeaderProps()
+                return (
+                  <th key={key} {...restColumn}>
+                    {column.render("Header")}
+                  </th>
+                )
+              })}
+            </tr>
+          )
+        })}
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row)
+          const { key, ...restRowProps } = row.getRowProps()
 
           return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-              ))}
+            <tr key={key} {...restRowProps}>
+              {row.cells.map((cell) => {
+                const { key, ...restCellProps } = cell.getCellProps()
+                return (
+                  <td key={key} {...restCellProps}>
+                    {cell.render("Cell")}
+                  </td>
+                )
+              })}
             </tr>
           )
         })}

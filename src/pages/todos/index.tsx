@@ -44,7 +44,7 @@ const Todos: NextPage = () => {
     if (inView) {
       fetchNextPage()
     }
-  }, [inView])
+  }, [inView, fetchNextPage])
 
   if (isLoading) return <Loading />
   if (isError) return <Error error={error} />
